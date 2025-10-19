@@ -1,50 +1,99 @@
-<!-- =========================== 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crown & Key — Fare Estimator</title>
+<style>
+  body {
+    margin:0;
+    background:#000;
+    color:#BE9E52;
+    font-family:"Segoe UI",Roboto,system-ui,-apple-system,Arial,sans-serif;
+  }
+  #estimator {
+    max-width:600px;
+    margin:40px auto;
+    padding:20px;
+    background:#000;
+    color:#BE9E52;
+    border-radius:12px;
+  }
+  h2 { text-align:center; color:#BE9E52; margin-top:0; font-weight:700; }
+
+  .ck-input {
+    display:block;
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:1px solid #2e2e2e;
+    background:#111;
+    color:#BE9E52;
+    box-sizing:border-box;
+    transition:all .25s ease;
+  }
+  .ck-input:hover, .ck-input:focus {
+    border-color:#BE9E52;
+    box-shadow:0 0 10px rgba(190,158,82,0.6);
+    outline:none;
+  }
+  .ck-btn {
+    width:100%;
+    padding:12px;
+    background:#BE9E52;
+    color:#000;
+    font-weight:bold;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:all .25s ease;
+  }
+  .ck-btn:hover:not(:disabled) {
+    background:#d1b86c;
+    box-shadow:0 0 10px rgba(190,158,82,0.4);
+  }
+  .ck-btn:disabled {
+    opacity:0.6;
+    cursor:not-allowed;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===========================
    Crown & Key Fare Estimator (Refined v2)
-   ✦ Black + Gold Styling ✦ Accessibility ✦ Input Glow ✦ Safe API Key ✦
+   ✦ Black + Gold Styling ✦ Accessibility ✦ Input Glow ✦
    =========================== -->
+<div id="estimator">
+  <h2>Crown &amp; Key — Fare Estimator</h2>
 
-<div id="estimator" style="max-width:600px;margin:auto;padding:20px;background:#000;color:#BE9E52;border-radius:12px;">
-  <h2 style="text-align:center;color:#BE9E52;">Crown &amp; Key — Fare Estimator</h2>
-
-  <!-- Pickup -->
   <label for="pickup">Pickup Location:</label>
-  <input type="text" id="pickup" aria-label="Pickup Location" placeholder="Detecting your location..."
-    class="ck-input">
+  <input type="text" id="pickup" aria-label="Pickup Location" placeholder="Detecting your location..." class="ck-input">
 
-  <!-- Drop-off -->
   <label for="dropoff">Drop-off Location:</label>
-  <input type="text" id="dropoff" aria-label="Drop-off Location" placeholder="Enter drop-off address or business"
-    class="ck-input">
+  <input type="text" id="dropoff" aria-label="Drop-off Location" placeholder="Enter drop-off address or business" class="ck-input">
 
-  <!-- Extra stop -->
   <label for="stop">Extra Stop (optional):</label>
-  <input type="text" id="stop" aria-label="Extra Stop" placeholder="Enter stop address or business"
-    class="ck-input">
+  <input type="text" id="stop" aria-label="Extra Stop" placeholder="Enter stop address or business" class="ck-input">
 
-  <!-- Full Day Booking -->
   <label id="fullDayLabel" style="display:flex;align-items:center;gap:10px;margin:12px 0 6px 0;padding:8px 10px;border:1px solid #2e2e2e;border-radius:8px;transition:all .3s ease;cursor:pointer;">
-    <input type="checkbox" id="fullDay" 
+    <input type="checkbox" id="fullDay"
            style="appearance:none;-webkit-appearance:none;width:16px;height:16px;border:1.5px solid #BE9E52;border-radius:4px;background:#000;cursor:pointer;position:relative;transition:all .25s ease;">
-    <span style="color:#BE9E52;font-weight:500;">Full Day Booking — $275 Flat Rate</span> 
+    <span style="color:#BE9E52;font-weight:500;">Full Day Booking — $275 Flat Rate</span>
   </label>
 
-  <!-- Promo -->
   <label for="promo">Promo Code:</label>
-  <input type="text" id="promo" aria-label="Promo Code" placeholder="Enter promo code"
-    class="ck-input">
+  <input type="text" id="promo" aria-label="Promo Code" placeholder="Enter promo code" class="ck-input">
 
-  <!-- Calculate button -->
   <button id="calcBtn" onclick="calculateFare()" class="ck-btn">Calculate Fare</button>
 
-  <!-- Results -->
   <div id="fareResult" style="margin-top:15px;text-align:center;font-size:18px;font-weight:bold;"></div>
 
-  <!-- Book button -->
   <div id="bookBtn" style="margin-top:15px;text-align:center;display:none;">
     <button onclick="goToBooking()" class="ck-btn">Book &amp; Pay</button>
   </div>
 
-  <!-- Terms -->
   <div style="margin-top:20px;font-size:13px;line-height:1.5;color:#aaa;background:#111;padding:15px;border-radius:8px;border:1px solid #2e2e2e;">
     <strong>Terms &amp; Conditions</strong><br><br>
     Reservations confirmed once payment is processed. Sedan rates only. Pet / Animal free ride service <br><br>
@@ -55,200 +104,149 @@
     One free reschedule if requested 12+ hours before pickup. 
     Crown &amp; Key is not responsible for delays due to weather or road closures. <br><br>
     <strong>Additional Fees:</strong><br>
-    • Wait time automatically charged at 50¢ per waiting minute if driver have to wait on client <br>
+    • Wait time automatically charged at 50¢ per waiting minute if driver has to wait on client <br>
     • Airport surcharge: $10 <br>
-    • Late-night surcharge (10pm–12am): +10% 
+    • Late-night surcharge (10 PM–6 AM): +10%
   </div>
 </div>
 
-<style>
-.ck-input {
-  display:block;width:100%;padding:10px;margin:8px 0;border-radius:6px;
-  border:1px solid #2e2e2e;background:#111;color:#BE9E52;box-sizing:border-box;
-  transition: all .25s ease;
-}
-.ck-input:hover, .ck-input:focus {
-  border-color:#BE9E52;
-  box-shadow:0 0 10px rgba(190,158,82,0.6);
-  outline:none;
-}
-.ck-btn {
-  width:100%;padding:12px;background:#BE9E52;color:#000;font-weight:bold;
-  border:none;border-radius:8px;cursor:pointer;transition:all .25s ease;
-}
-.ck-btn:hover:not(:disabled) {
-  background:#d1b86c;
-  box-shadow:0 0 10px rgba(190,158,82,0.4);
-}
-.ck-btn:disabled {
-  opacity:0.6;cursor:not-allowed;
-}
-</style>
-
 <script>
-let latestFare = 0, latestPickup = "", latestDropoff = "", latestStop = "", isFullDay = false;
+let latestFare=0,latestPickup="",latestDropoff="",latestStop="",isFullDay=false;
 
-function dollars(n) { return "$" + n.toFixed(2); }
-function isPeakTraffic() {
-  const hour = new Date().getHours();
-  return (hour >= 7 && hour < 9) || (hour >= 16 && hour < 18);
-}
+function dollars(n){return "$"+n.toFixed(2);}
+function isPeakTraffic(){const h=new Date().getHours();return(h>=7&&h<9)||(h>=16&&h<18);}
 
-document.addEventListener("DOMContentLoaded", () => {
-  const fullDayCheckbox = document.getElementById("fullDay");
-  const fullDayLabel = document.getElementById("fullDayLabel");
-
-  fullDayCheckbox.addEventListener("change", () => {
-    if (fullDayCheckbox.checked) {
-      fullDayCheckbox.style.background = "#BE9E52";
-      fullDayCheckbox.style.boxShadow = "0 0 10px rgba(190,158,82,.6)";
-      fullDayLabel.style.border = "1px solid #BE9E52";
-      fullDayLabel.style.boxShadow = "0 0 15px rgba(190,158,82,.45)";
-      fullDayLabel.style.background = "#111";
-    } else {
-      fullDayCheckbox.style.background = "#000";
-      fullDayCheckbox.style.boxShadow = "none";
-      fullDayLabel.style.border = "1px solid #2e2e2e";
-      fullDayLabel.style.boxShadow = "none";
-      fullDayLabel.style.background = "transparent";
+document.addEventListener("DOMContentLoaded",()=>{
+  const fullDayCheckbox=document.getElementById("fullDay");
+  const fullDayLabel=document.getElementById("fullDayLabel");
+  fullDayCheckbox.addEventListener("change",()=>{
+    if(fullDayCheckbox.checked){
+      fullDayCheckbox.style.background="#BE9E52";
+      fullDayCheckbox.style.boxShadow="0 0 10px rgba(190,158,82,.6)";
+      fullDayLabel.style.border="1px solid #BE9E52";
+      fullDayLabel.style.boxShadow="0 0 15px rgba(190,158,82,.45)";
+      fullDayLabel.style.background="#111";
+    }else{
+      fullDayCheckbox.style.background="#000";
+      fullDayCheckbox.style.boxShadow="none";
+      fullDayLabel.style.border="1px solid #2e2e2e";
+      fullDayLabel.style.boxShadow="none";
+      fullDayLabel.style.background="transparent";
     }
   });
 });
 
-function calculateFare() {
-  const pickup = document.getElementById("pickup").value.trim();
-  const dropoff = document.getElementById("dropoff").value.trim();
-  const stop = document.getElementById("stop").value.trim();
-  const promoCode = document.getElementById("promo").value.trim().toLowerCase();
-  const fullDay = document.getElementById("fullDay").checked;
-  const btn = document.getElementById("calcBtn");
-  const result = document.getElementById("fareResult");
+function calculateFare(){
+  const pickup=document.getElementById("pickup").value.trim();
+  const dropoff=document.getElementById("dropoff").value.trim();
+  const stop=document.getElementById("stop").value.trim();
+  const promoCode=document.getElementById("promo").value.trim().toLowerCase();
+  const fullDay=document.getElementById("fullDay").checked;
+  const btn=document.getElementById("calcBtn");
+  const result=document.getElementById("fareResult");
 
-  if (!pickup) return alert("Please enter a pickup location.");
-  if (!fullDay && !dropoff) return alert("Please enter pickup and drop-off locations.");
+  if(!pickup)return alert("Please enter a pickup location.");
+  if(!fullDay&&!dropoff)return alert("Please enter pickup and drop-off locations.");
 
-  btn.disabled = true;
-  result.innerHTML = "Calculating...";
+  btn.disabled=true;
+  result.innerHTML="Calculating...";
 
-  if (fullDay) {
-    isFullDay = true;
-    latestFare = 275; 
-    latestPickup = pickup;
-    latestDropoff = "(Full Day Booking)";
-    latestStop = stop;
-    result.innerHTML = `<p>Estimated Fare: ${dollars(latestFare)}</p><p>(Full Day Booking Selected)</p>`;
-    document.getElementById("bookBtn").style.display = "block";
-    btn.disabled = false;
+  if(fullDay){
+    isFullDay=true;
+    latestFare=275;
+    latestPickup=pickup;
+    latestDropoff="(Full Day Booking)";
+    latestStop=stop;
+    result.innerHTML=`<p>Estimated Fare: ${dollars(latestFare)}</p><p>(Full Day Booking Selected)</p>`;
+    document.getElementById("bookBtn").style.display="block";
+    btn.disabled=false;
     return;
   }
 
-  isFullDay = false;
-  const dm = new google.maps.DistanceMatrixService();
-  const legs = stop ? [[pickup, stop], [stop, dropoff]] : [[pickup, dropoff]];
-  let totalDist = 0, totalDur = 0, done = 0;
+  isFullDay=false;
+  const dm=new google.maps.DistanceMatrixService();
+  const legs=stop?[[pickup,stop],[stop,dropoff]]:[[pickup,dropoff]];
+  let totalDist=0,totalDur=0,done=0;
 
-  legs.forEach(([o, d]) => {
+  legs.forEach(([o,d])=>{
     dm.getDistanceMatrix({
-      origins: [o], destinations: [d],
-      travelMode: "DRIVING", unitSystem: google.maps.UnitSystem.IMPERIAL
-    }, (res, status) => {
+      origins:[o],destinations:[d],
+      travelMode:"DRIVING",unitSystem:google.maps.UnitSystem.IMPERIAL
+    },(res,status)=>{
       done++;
-      if (status === "OK") {
-        const el = res.rows[0].elements[0];
-        if (el.status === "OK") {
-          totalDist += el.distance.value;
-          totalDur += el.duration.value;
-        }
+      if(status==="OK"){
+        const el=res.rows[0].elements[0];
+        if(el.status==="OK"){totalDist+=el.distance.value;totalDur+=el.duration.value;}
       }
-      if (done === legs.length) {
-        if (totalDist === 0) {
-          alert("Could not calculate distance. Please check addresses.");
-          btn.disabled = false;
-          result.innerHTML = "";
-          return;
-        }
-
-        const miles = totalDist / 1609.344;
-        const mins = totalDur / 60;
-        let uberFare = 2.5 + (miles * 1.5) + (mins * 0.25);
-        if (uberFare < 7) uberFare = 7;
-
-        let fare = uberFare * 0.85;
-        if (isPeakTraffic()) fare *= 1.05;
-
-        const h = new Date().getHours();
-        const p = pickup.toLowerCase(), d = dropoff.toLowerCase();
-        if (p.includes("airport") || d.includes("airport") || p.includes("bna") || d.includes("bna")) fare += 10;
-        if (h >= 22 || h < 6) fare *= 1.10;
-
-        let discount = 0;
-        if (promoCode === "blkgld") discount = fare * 0.35; 
-        if (promoCode === "fmlee") discount = fare * 0.25; 
-        if (promoCode === "mor0ff") discount = fare * 0.15; 
-
-        let finalFare = fare - discount;
-        finalFare = Math.round(finalFare / 2) * 2;
-
-        latestFare = finalFare;
-        latestPickup = pickup;
-        latestDropoff = dropoff;
-        latestStop = stop;
-
-        let html = `<p>Estimated Fare: ${dollars(finalFare)}</p>`;
-        if (discount > 0) html += `<p>Promo Applied: -${dollars(discount)}</p>`;
-        result.innerHTML = html;
-        document.getElementById("bookBtn").style.display = "block";
-        btn.disabled = false;
+      if(done===legs.length){
+        if(totalDist===0){alert("Could not calculate distance. Please check addresses.");btn.disabled=false;result.innerHTML="";return;}
+        const miles=totalDist/1609.344,mins=totalDur/60;
+        let uberFare=2.5+(miles*1.5)+(mins*0.25);
+        if(uberFare<7)uberFare=7;
+        let fare=uberFare*0.85;
+        if(isPeakTraffic())fare*=1.05;
+        const h=new Date().getHours();
+        const p=pickup.toLowerCase(),dd=dropoff.toLowerCase();
+        if(p.includes("airport")||dd.includes("airport")||p.includes("bna")||dd.includes("bna"))fare+=10;
+        if(h>=22||h<6)fare*=1.10;
+        let discount=0;
+        if(promoCode==="blkgld")discount=fare*0.35;
+        if(promoCode==="fmlee")discount=fare*0.25;
+        if(promoCode==="mor0ff")discount=fare*0.15;
+        let finalFare=fare-discount;
+        finalFare=Math.round(finalFare/2)*2;
+        latestFare=finalFare;
+        latestPickup=pickup;
+        latestDropoff=dropoff;
+        latestStop=stop;
+        let html=`<p>Estimated Fare: ${dollars(finalFare)}</p>`;
+        if(discount>0)html+=`<p>Promo Applied: -${dollars(discount)}</p>`;
+        result.innerHTML=html;
+        document.getElementById("bookBtn").style.display="block";
+        btn.disabled=false;
       }
     });
   });
 }
 
-function goToBooking() {
-  const bookingUrl =
-    "https://www.crownkey.net/booking-sheet" +
-    "?estimatedFee=" + encodeURIComponent(latestFare) +
-    "&pickup=" + encodeURIComponent(latestPickup) +
-    "&dropoff=" + encodeURIComponent(latestDropoff) +
-    (latestStop ? "&stop=" + encodeURIComponent(latestStop) : "") +
-    (isFullDay ? "&fullDayBooking=Yes" : "");
-  window.location.href = bookingUrl;
+function goToBooking(){
+  const bookingUrl="https://www.crownkey.net/booking-sheet"+
+  "?estimatedFee="+encodeURIComponent(latestFare)+
+  "&pickup="+encodeURIComponent(latestPickup)+
+  "&dropoff="+encodeURIComponent(latestDropoff)+
+  (latestStop?"&stop="+encodeURIComponent(latestStop):"")+
+  (isFullDay?"&fullDayBooking=Yes":"");
+  window.location.href=bookingUrl;
 }
 
-function initAutocomplete() {
-  const opts = { fields: ["formatted_address", "geometry", "name"], types: ["geocode", "establishment"] };
-  const pickupInput = document.getElementById("pickup");
-  const dropoffInput = document.getElementById("dropoff");
-  const stopInput = document.getElementById("stop");
-
-  const pickupAuto = new google.maps.places.Autocomplete(pickupInput, opts);
-  const dropoffAuto = new google.maps.places.Autocomplete(dropoffInput, opts);
-  const stopAuto = new google.maps.places.Autocomplete(stopInput, opts);
-
-  const style = document.createElement('style');
-  style.innerHTML = `.pac-item { background:#000 !important; color:#BE9E52 !important; }
-  .pac-item-query { color:#BE9E52 !important; }
-  .pac-container { background:#000 !important; border:1px solid #BE9E52 !important; z-index:999999; }`;
+function initAutocomplete(){
+  const opts={fields:["formatted_address","geometry","name"],types:["geocode","establishment"]};
+  const pickupInput=document.getElementById("pickup"),
+        dropoffInput=document.getElementById("dropoff"),
+        stopInput=document.getElementById("stop");
+  const pickupAuto=new google.maps.places.Autocomplete(pickupInput,opts);
+  const dropoffAuto=new google.maps.places.Autocomplete(dropoffInput,opts);
+  const stopAuto=new google.maps.places.Autocomplete(stopInput,opts);
+  const style=document.createElement('style');
+  style.innerHTML=`.pac-item{background:#000!important;color:#BE9E52!important;}
+  .pac-item-query{color:#BE9E52!important;}
+  .pac-container{background:#000!important;border:1px solid #BE9E52!important;z-index:999999;}`;
   document.head.appendChild(style);
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      const userLoc = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      const bounds = new google.maps.LatLngBounds(userLoc);
-      pickupAuto.setBounds(bounds);
-      dropoffAuto.setBounds(bounds);
-      stopAuto.setBounds(bounds);
-
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: userLoc }, (results, status) => {
-        if (status === "OK" && results[0]) pickupInput.value = results[0].formatted_address;
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(pos=>{
+      const userLoc=new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+      const bounds=new google.maps.LatLngBounds(userLoc);
+      pickupAuto.setBounds(bounds);dropoffAuto.setBounds(bounds);stopAuto.setBounds(bounds);
+      const geocoder=new google.maps.Geocoder();
+      geocoder.geocode({location:userLoc},(results,status)=>{
+        if(status==="OK"&&results[0])pickupInput.value=results[0].formatted_address;
       });
-    }, () => {
-      pickupInput.placeholder = "Enter pickup address";
-    });
+    },()=>{pickupInput.placeholder="Enter pickup address";});
   }
 }
 </script>
 
-<!-- Google Maps API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9iYiSPmkBiet-HGHQgp8F9onfbNdxTfE&libraries=places&callback=initAutocomplete" async defer></script>
+</body>
+</html>
