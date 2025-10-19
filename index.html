@@ -62,7 +62,7 @@
 <body>
 
 <!-- ===========================
-   Crown & Key Fare Estimator (Refined v2)
+   Crown & Key Fare Estimator (Refined v3)
    ✦ Black + Gold Styling ✦ Accessibility ✦ Input Glow ✦
    =========================== -->
 <div id="estimator">
@@ -210,13 +210,13 @@ function calculateFare(){
 }
 
 function goToBooking(){
-  const bookingUrl="https://www.crownkey.net/booking-sheet"+
-  "?estimatedFee="+encodeURIComponent(latestFare)+
-  "&pickup="+encodeURIComponent(latestPickup)+
-  "&dropoff="+encodeURIComponent(latestDropoff)+
-  (latestStop?"&stop="+encodeURIComponent(latestStop):"")+
-  (isFullDay?"&fullDayBooking=Yes":"");
-  window.location.href=bookingUrl;
+  const bookingUrl="https://form.jotform.com/252586739165167"+
+    "?pickup="+encodeURIComponent(latestPickup)+
+    "&dropoff="+encodeURIComponent(latestDropoff)+
+    (latestStop?"&stop="+encodeURIComponent(latestStop):"")+
+    "&estimatedFee="+encodeURIComponent(latestFare)+
+    (isFullDay?"&fullDayBooking=Yes":"");
+  window.open(bookingUrl,"_self");
 }
 
 function initAutocomplete(){
