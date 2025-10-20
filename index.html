@@ -4,189 +4,173 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Crown & Key — Fare Estimator</title>
-
-<!-- ===========================
-   Crown & Key Fare Estimator (GitHub Safe Embed)
-   ✦ Black + Gold Styling ✦ Flush Layout ✦ Redirects to Jotform ✦
-   =========================== -->
-
 <style>
-  body {
-    margin: 0;
-    background: #000;
-    color: #BE9E52;
-    font-family: "Segoe UI", Roboto, system-ui, -apple-system, Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
+  html, body {
+    margin:0;
+    padding:0;
+    width:100%;
+    background:#000;
+    color:#BE9E52;
+    font-family:"Segoe UI",Roboto,system-ui,-apple-system,Arial,sans-serif;
+    box-sizing:border-box;
   }
 
   #estimator {
-    width: 95%;
-    max-width: 640px;
-    margin: 40px auto;
-    padding: 20px 18px 28px;
-    background: #000;
-    color: #BE9E52;
-    border-radius: 12px;
-    box-sizing: border-box;
+    width:100%;
+    max-width:700px; /* widened from 600px */
+    margin:0 auto; /* centered horizontally */
+    padding:24px 20px 32px; /* balanced internal padding */
+    background:#000;
+    color:#BE9E52;
+    border-radius:12px;
+    box-sizing:border-box;
   }
 
   h2 {
-    text-align: center;
-    color: #BE9E52;
-    margin-top: 4px;
-    font-weight: 700;
-    font-size: 1.35rem;
-    letter-spacing: 0.4px;
-  }
-
-  label {
-    font-weight: 500;
-    color: #BE9E52;
-    font-size: 14px;
-    display: block;
-    margin-top: 12px;
+    text-align:center;
+    color:#BE9E52;
+    margin-top:0;
+    font-weight:700;
+    font-size:1.4rem;
   }
 
   .ck-input {
-    display: block;
-    width: 100%;
-    padding: 10px 12px;
-    margin-top: 6px;
-    border-radius: 6px;
-    border: 1px solid #2e2e2e;
-    background: #0c0c0c;
-    color: #BE9E52;
-    font-size: 15px;
-    box-sizing: border-box;
-    transition: all 0.25s ease;
+    display:block;
+    width:100%;
+    padding:10px 12px;
+    margin:8px 0;
+    border-radius:6px;
+    border:1px solid #2e2e2e;
+    background:#111;
+    color:#BE9E52;
+    font-size:15px;
+    box-sizing:border-box;
+    transition:all .25s ease;
   }
 
-  .ck-input::placeholder {
-    color: #9e884d;
-  }
-
-  .ck-input:hover,
-  .ck-input:focus {
-    border-color: #BE9E52;
-    box-shadow: 0 0 10px rgba(190, 158, 82, 0.6);
-    outline: none;
+  .ck-input:hover, .ck-input:focus {
+    border-color:#BE9E52;
+    box-shadow:0 0 10px rgba(190,158,82,0.6);
+    outline:none;
   }
 
   .ck-btn {
-    width: 100%;
-    padding: 13px;
-    margin-top: 12px;
-    background: #BE9E52;
-    color: #000;
-    font-weight: 700;
-    font-size: 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    width:100%;
+    padding:13px;
+    background:#BE9E52;
+    color:#000;
+    font-weight:bold;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:all .25s ease;
   }
 
   .ck-btn:hover:not(:disabled) {
-    background: #d1b86c;
-    box-shadow: 0 0 10px rgba(190, 158, 82, 0.4);
+    background:#d1b86c;
+    box-shadow:0 0 10px rgba(190,158,82,0.4);
   }
 
   .ck-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+    opacity:0.6;
+    cursor:not-allowed;
   }
 
+  /* Full-day box */
   #fullDayLabel {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 14px 0 6px 0;
-    padding: 8px 10px;
-    border: 1px solid #2e2e2e;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    background: #000;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:12px 0 6px 0;
+    padding:8px 10px;
+    border:1px solid #2e2e2e;
+    border-radius:8px;
+    transition:all .3s ease;
+    cursor:pointer;
+    background:#000;
   }
 
   #fullDay {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 1.5px solid #BE9E52;
-    border-radius: 4px;
-    background: #000;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    appearance:none;
+    -webkit-appearance:none;
+    width:18px;
+    height:18px;
+    border:1.5px solid #BE9E52;
+    border-radius:4px;
+    background:#000;
+    cursor:pointer;
+    transition:all .25s ease;
   }
 
+  /* Terms box */
   .terms-box {
-    margin-top: 22px;
-    font-size: 13px;
-    line-height: 1.5;
-    color: #aaa;
-    background: #111;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #2e2e2e;
+    margin-top:20px;
+    font-size:13px;
+    line-height:1.5;
+    color:#aaa;
+    background:#111;
+    padding:15px;
+    border-radius:8px;
+    border:1px solid #2e2e2e;
   }
 
-  @media (max-width: 768px) {
+  /* Responsive fix for Jotform embeds */
+  @media (max-width: 480px) {
     #estimator {
-      width: calc(100% - 14px);
-      padding: 18px 12px 24px;
+      max-width:100%;
+      border-radius:0;
+      padding:18px 14px 28px;
     }
   }
 </style>
 </head>
-
 <body>
-  <div id="estimator">
-    <h2>Crown &amp; Key — Fare Estimator</h2>
 
-    <label for="pickup">Pickup Location:</label>
-    <input type="text" id="pickup" placeholder="Detecting your location..." class="ck-input">
+<!-- ===========================
+   Crown & Key Fare Estimator (Refined v3 — Full Width Fix)
+   =========================== -->
+<div id="estimator">
+  <h2>Crown &amp; Key — Fare Estimator</h2>
 
-    <label for="dropoff">Drop-off Location:</label>
-    <input type="text" id="dropoff" placeholder="Enter drop-off address or business" class="ck-input">
+  <label for="pickup">Pickup Location:</label>
+  <input type="text" id="pickup" aria-label="Pickup Location" placeholder="Detecting your location..." class="ck-input">
 
-    <label for="stop">Extra Stop (optional):</label>
-    <input type="text" id="stop" placeholder="Enter stop address or business" class="ck-input">
+  <label for="dropoff">Drop-off Location:</label>
+  <input type="text" id="dropoff" aria-label="Drop-off Location" placeholder="Enter drop-off address or business" class="ck-input">
 
-    <label id="fullDayLabel">
-      <input type="checkbox" id="fullDay">
-      <span>Full Day Booking — $275 Flat Rate</span>
-    </label>
+  <label for="stop">Extra Stop (optional):</label>
+  <input type="text" id="stop" aria-label="Extra Stop" placeholder="Enter stop address or business" class="ck-input">
 
-    <label for="promo">Promo Code:</label>
-    <input type="text" id="promo" placeholder="Enter promo code" class="ck-input">
+  <label id="fullDayLabel">
+    <input type="checkbox" id="fullDay">
+    <span>Full Day Booking — $275 Flat Rate</span>
+  </label>
 
-    <button id="calcBtn" onclick="calculateFare()" class="ck-btn">Calculate Fare</button>
+  <label for="promo">Promo Code:</label>
+  <input type="text" id="promo" aria-label="Promo Code" placeholder="Enter promo code" class="ck-input">
 
-    <div id="fareResult" style="margin-top:15px;text-align:center;font-size:18px;font-weight:bold;"></div>
+  <button id="calcBtn" onclick="calculateFare()" class="ck-btn">Calculate Fare</button>
 
-    <div id="bookBtn" style="margin-top:15px;text-align:center;display:none;">
-      <button onclick="goToBooking()" class="ck-btn">Book &amp; Pay</button>
-    </div>
+  <div id="fareResult" style="margin-top:15px;text-align:center;font-size:18px;font-weight:bold;"></div>
 
-    <div class="terms-box">
-      <strong>Terms &amp; Conditions</strong><br><br>
-      Reservations confirmed once payment is processed. Sedan rates only. Pet / Animal free ride service.<br><br>
-      <strong>Cancellation Policy:</strong><br>
-      • 24h+ notice: Full refund<br>
-      • 12–24h notice: 50% refund<br>
-      • Under 12h or no-show: No refund<br><br>
-      One free reschedule if requested 12+ hours before pickup.<br>
-      <strong>Additional Fees:</strong><br>
-      • Wait time automatically charged at 50¢ per minute if driver must wait<br>
-      • Airport surcharge: $10<br>
-      • Late-night surcharge (10 PM–6 AM): +10%
-    </div>
+  <div id="bookBtn" style="margin-top:15px;text-align:center;display:none;">
+    <button onclick="goToBooking()" class="ck-btn">Book &amp; Pay</button>
   </div>
+
+  <div class="terms-box">
+    <strong>Terms &amp; Conditions</strong><br><br>
+    Reservations confirmed once payment is processed. Sedan rates only. Pet / Animal free ride service.<br><br>
+    <strong>Cancellation Policy:</strong><br>
+    • 24h+ notice: Full refund<br>
+    • 12–24h notice: 50% refund<br>
+    • Under 12h or no-show: No refund<br><br>
+    One free reschedule if requested 12+ hours before pickup.<br><br>
+    <strong>Additional Fees:</strong><br>
+    • Wait time automatically charged at 50¢ per waiting minute<br>
+    • Airport surcharge: $10<br>
+    • Late-night surcharge (10 PM–6 AM): +10%
+  </div>
+</div>
 
 <script>
 let latestFare=0,latestPickup="",latestDropoff="",latestStop="",isFullDay=false;
@@ -195,21 +179,21 @@ function dollars(n){return "$"+n.toFixed(2);}
 function isPeakTraffic(){const h=new Date().getHours();return(h>=7&&h<9)||(h>=16&&h<18);}
 
 document.addEventListener("DOMContentLoaded",()=>{
-  const fullDay=document.getElementById("fullDay");
-  const label=document.getElementById("fullDayLabel");
-  fullDay.addEventListener("change",()=>{
-    if(fullDay.checked){
-      fullDay.style.background="#BE9E52";
-      fullDay.style.boxShadow="0 0 10px rgba(190,158,82,.6)";
-      label.style.border="1px solid #BE9E52";
-      label.style.boxShadow="0 0 15px rgba(190,158,82,.45)";
-      label.style.background="#111";
-    } else {
-      fullDay.style.background="#000";
-      fullDay.style.boxShadow="none";
-      label.style.border="1px solid #2e2e2e";
-      label.style.boxShadow="none";
-      label.style.background="transparent";
+  const fullDayCheckbox=document.getElementById("fullDay");
+  const fullDayLabel=document.getElementById("fullDayLabel");
+  fullDayCheckbox.addEventListener("change",()=>{
+    if(fullDayCheckbox.checked){
+      fullDayCheckbox.style.background="#BE9E52";
+      fullDayCheckbox.style.boxShadow="0 0 10px rgba(190,158,82,.6)";
+      fullDayLabel.style.border="1px solid #BE9E52";
+      fullDayLabel.style.boxShadow="0 0 15px rgba(190,158,82,.45)";
+      fullDayLabel.style.background="#111";
+    }else{
+      fullDayCheckbox.style.background="#000";
+      fullDayCheckbox.style.boxShadow="none";
+      fullDayLabel.style.border="1px solid #2e2e2e";
+      fullDayLabel.style.boxShadow="none";
+      fullDayLabel.style.background="transparent";
     }
   });
 });
@@ -218,23 +202,27 @@ function calculateFare(){
   const pickup=document.getElementById("pickup").value.trim();
   const dropoff=document.getElementById("dropoff").value.trim();
   const stop=document.getElementById("stop").value.trim();
-  const promo=document.getElementById("promo").value.trim().toLowerCase();
+  const promoCode=document.getElementById("promo").value.trim().toLowerCase();
   const fullDay=document.getElementById("fullDay").checked;
   const btn=document.getElementById("calcBtn");
-  const res=document.getElementById("fareResult");
+  const result=document.getElementById("fareResult");
 
-  if(!pickup) return alert("Please enter a pickup location.");
-  if(!fullDay&&!dropoff) return alert("Please enter pickup and drop-off locations.");
+  if(!pickup)return alert("Please enter a pickup location.");
+  if(!fullDay&&!dropoff)return alert("Please enter pickup and drop-off locations.");
 
   btn.disabled=true;
-  res.innerHTML="Calculating...";
+  result.innerHTML="Calculating...";
 
   if(fullDay){
-    isFullDay=true;latestFare=275;latestPickup=pickup;
-    latestDropoff="(Full Day Booking)";latestStop=stop;
-    res.innerHTML=`<p>Estimated Fare: ${dollars(latestFare)}</p><p>(Full Day Booking Selected)</p>`;
+    isFullDay=true;
+    latestFare=275;
+    latestPickup=pickup;
+    latestDropoff="(Full Day Booking)";
+    latestStop=stop;
+    result.innerHTML=`<p>Estimated Fare: ${dollars(latestFare)}</p><p>(Full Day Booking Selected)</p>`;
     document.getElementById("bookBtn").style.display="block";
-    btn.disabled=false;return;
+    btn.disabled=false;
+    return;
   }
 
   isFullDay=false;
@@ -243,34 +231,39 @@ function calculateFare(){
   let totalDist=0,totalDur=0,done=0;
 
   legs.forEach(([o,d])=>{
-    dm.getDistanceMatrix({origins:[o],destinations:[d],travelMode:"DRIVING",unitSystem:google.maps.UnitSystem.IMPERIAL},
-    (resMatrix,status)=>{
+    dm.getDistanceMatrix({
+      origins:[o],destinations:[d],
+      travelMode:"DRIVING",unitSystem:google.maps.UnitSystem.IMPERIAL
+    },(res,status)=>{
       done++;
       if(status==="OK"){
-        const el=resMatrix.rows[0].elements[0];
+        const el=res.rows[0].elements[0];
         if(el.status==="OK"){totalDist+=el.distance.value;totalDur+=el.duration.value;}
       }
       if(done===legs.length){
-        if(totalDist===0){alert("Could not calculate distance.");btn.disabled=false;res.innerHTML="";return;}
+        if(totalDist===0){alert("Could not calculate distance. Please check addresses.");btn.disabled=false;result.innerHTML="";return;}
         const miles=totalDist/1609.344,mins=totalDur/60;
         let uberFare=2.5+(miles*1.5)+(mins*0.25);
         if(uberFare<7)uberFare=7;
         let fare=uberFare*0.85;
         if(isPeakTraffic())fare*=1.05;
         const h=new Date().getHours();
-        const p=pickup.toLowerCase(),d=dropoff.toLowerCase();
-        if(p.includes("airport")||d.includes("airport")||p.includes("bna")||d.includes("bna"))fare+=10;
+        const p=pickup.toLowerCase(),dd=dropoff.toLowerCase();
+        if(p.includes("airport")||dd.includes("airport")||p.includes("bna")||dd.includes("bna"))fare+=10;
         if(h>=22||h<6)fare*=1.10;
         let discount=0;
-        if(promo==="blkgld")discount=fare*0.35;
-        if(promo==="fmlee")discount=fare*0.25;
-        if(promo==="mor0ff")discount=fare*0.15;
+        if(promoCode==="blkgld")discount=fare*0.35;
+        if(promoCode==="fmlee")discount=fare*0.25;
+        if(promoCode==="mor0ff")discount=fare*0.15;
         let finalFare=fare-discount;
         finalFare=Math.round(finalFare/2)*2;
-        latestFare=finalFare;latestPickup=pickup;latestDropoff=dropoff;latestStop=stop;
+        latestFare=finalFare;
+        latestPickup=pickup;
+        latestDropoff=dropoff;
+        latestStop=stop;
         let html=`<p>Estimated Fare: ${dollars(finalFare)}</p>`;
         if(discount>0)html+=`<p>Promo Applied: -${dollars(discount)}</p>`;
-        res.innerHTML=html;
+        result.innerHTML=html;
         document.getElementById("bookBtn").style.display="block";
         btn.disabled=false;
       }
@@ -279,21 +272,23 @@ function calculateFare(){
 }
 
 function goToBooking(){
-  const jotUrl="https://form.jotform.com/252586739165167"+
+  const bookingUrl="https://form.jotform.com/252586739165167"+
     "?pickup="+encodeURIComponent(latestPickup)+
     "&dropoff="+encodeURIComponent(latestDropoff)+
     (latestStop?"&stop="+encodeURIComponent(latestStop):"")+
     "&estimatedFee="+encodeURIComponent(latestFare)+
     (isFullDay?"&fullDayBooking=Yes":"");
-  window.location.href=jotUrl;
+  window.open(bookingUrl,"_self");
 }
 
 function initAutocomplete(){
   const opts={fields:["formatted_address","geometry","name"],types:["geocode","establishment"]};
-  const pickup=document.getElementById("pickup"),dropoff=document.getElementById("dropoff"),stop=document.getElementById("stop");
-  const auto1=new google.maps.places.Autocomplete(pickup,opts),
-        auto2=new google.maps.places.Autocomplete(dropoff,opts),
-        auto3=new google.maps.places.Autocomplete(stop,opts);
+  const pickupInput=document.getElementById("pickup"),
+        dropoffInput=document.getElementById("dropoff"),
+        stopInput=document.getElementById("stop");
+  const pickupAuto=new google.maps.places.Autocomplete(pickupInput,opts);
+  const dropoffAuto=new google.maps.places.Autocomplete(dropoffInput,opts);
+  const stopAuto=new google.maps.places.Autocomplete(stopInput,opts);
   const style=document.createElement('style');
   style.innerHTML=`.pac-item{background:#000!important;color:#BE9E52!important;}
   .pac-item-query{color:#BE9E52!important;}
@@ -304,17 +299,16 @@ function initAutocomplete(){
     navigator.geolocation.getCurrentPosition(pos=>{
       const userLoc=new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
       const bounds=new google.maps.LatLngBounds(userLoc);
-      auto1.setBounds(bounds);auto2.setBounds(bounds);auto3.setBounds(bounds);
+      pickupAuto.setBounds(bounds);dropoffAuto.setBounds(bounds);stopAuto.setBounds(bounds);
       const geocoder=new google.maps.Geocoder();
       geocoder.geocode({location:userLoc},(results,status)=>{
-        if(status==="OK"&&results[0])pickup.value=results[0].formatted_address;
+        if(status==="OK"&&results[0])pickupInput.value=results[0].formatted_address;
       });
-    },()=>{pickup.placeholder="Enter pickup address";});
+    },()=>{pickupInput.placeholder="Enter pickup address";});
   }
 }
 </script>
 
-<!-- Use a safe key proxy so GitHub won’t detect the secret -->
-<script src="https://maps.googleapis.com/maps/api/js?key=${{YOUR_MAPS_API_KEY}}&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9iYiSPmkBiet-HGHQgp8F9onfbNdxTfE&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
