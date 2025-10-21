@@ -5,86 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Crown & Key — Fare Estimator</title>
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background: #000;
-    color: #BE9E52;
-    font-family: "Segoe UI", Roboto, system-ui, -apple-system, Arial, sans-serif;
-    overflow-x: hidden;
+  body {
+    margin:0;
+    background:#000;
+    color:#BE9E52;
+    font-family:"Segoe UI",Roboto,system-ui,-apple-system,Arial,sans-serif;
   }
-
-  /* MAIN CONTAINER — full width fix for iframe */
   #estimator {
-    width: 100%;
-    max-width: 680px; /* slightly wider than before */
-    margin: 40px auto;
-    padding: 20px 28px;
-    background: #000;
-    color: #BE9E52;
-    border-radius: 12px;
-    box-sizing: border-box;
+    max-width:600px;
+    margin:40px auto;
+    padding:20px;
+    background:#000;
+    color:#BE9E52;
+    border-radius:12px;
   }
-
-  h2 {
-    text-align: center;
-    color: #BE9E52;
-    margin-top: 0;
-    font-weight: 700;
-  }
+  h2 { text-align:center; color:#BE9E52; margin-top:0; font-weight:700; }
 
   .ck-input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #2e2e2e;
-    background: #111;
-    color: #BE9E52;
-    box-sizing: border-box;
-    transition: all .25s ease;
+    display:block;
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:1px solid #2e2e2e;
+    background:#111;
+    color:#BE9E52;
+    box-sizing:border-box;
+    transition:all .25s ease;
   }
   .ck-input:hover, .ck-input:focus {
-    border-color: #BE9E52;
-    box-shadow: 0 0 10px rgba(190,158,82,0.6);
-    outline: none;
+    border-color:#BE9E52;
+    box-shadow:0 0 10px rgba(190,158,82,0.6);
+    outline:none;
   }
-
   .ck-btn {
-    width: 100%;
-    padding: 12px;
-    background: #BE9E52;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all .25s ease;
+    width:100%;
+    padding:12px;
+    background:#BE9E52;
+    color:#000;
+    font-weight:bold;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:all .25s ease;
   }
   .ck-btn:hover:not(:disabled) {
-    background: #d1b86c;
-    box-shadow: 0 0 10px rgba(190,158,82,0.4);
+    background:#d1b86c;
+    box-shadow:0 0 10px rgba(190,158,82,0.4);
   }
   .ck-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  /* Center estimator perfectly in Jotform iframe */
-  body, #estimator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    opacity:0.6;
+    cursor:not-allowed;
   }
 </style>
 </head>
 <body>
 
 <!-- ===========================
-   Crown & Key Fare Estimator (Refined v3 + Width Fix)
+   Crown & Key Fare Estimator (Refined v3)
+   ✦ Black + Gold Styling ✦ Accessibility ✦ Input Glow ✦
    =========================== -->
 <div id="estimator">
   <h2>Crown &amp; Key — Fare Estimator</h2>
